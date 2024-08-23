@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:th="https://thymeleaf.org">
+<head th:replace="~{../static/cdn :: cdn}"></head>
+<body>
+	<nav th:replace="~{../static/nav :: nav}"></nav>
+	<div class="container mt-4" data-bs-theme="dark">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="card-title">Home</h3>
+				<form action="upload" method="post" enctype="multipart/form-data">
+					<div class="input-group mt-4 mb-4">
+						<input  required type="file" class="form-control" id="file" name="file" aria-describedby="upload" aria-label="Upload">
+						<button class="btn btn-info" type="submit" id="upload">Upload</button>
+					</div>
+				</form>
+				<script>
+					const uploadField = document.getElementById("file");
+	
+					uploadField.onchange = function() {
+						// 500MB
+					    if(this.files[0].size > 524288000) {
+					       alert("Max file size is 500MB");
+					       this.value = "";
+					    }
+					};
+				</script>
+				
+				<table th:if="${userFiles.size() > 0}" class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Uploaded at</th>
+							<th scope="col">Download</th>
+							<th scope="col">Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="file : ${userFiles}">
+							<tr>
+								<td th:text="${file.name}"></td>
+								<td th:text="${file.uploadedAt}"></td>
+								<td>
+									<form th:action="@{'download' + '/' + ${file.id}}" method="get">
+										<button class="btn btn-warning btn-lg">
+											<i class="bi-download"></i>
+										</button>
+									</form>
+								</td>
+								<td>
+									<form th:action="@{'delete' + '/' + ${file.id}}" method="get">
+										<button type="submit" class="btn btn-danger btn-lg">
+											<i class="bi-trash"></i>
+										</button>									
+									</form>
+								</td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

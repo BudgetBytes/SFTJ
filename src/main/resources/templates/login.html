@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns:th="https://thymeleaf.org">
+<head th:replace="~{../static/cdn :: cdn}"></head>
+<body>
+	<nav th:replace="~{../static/nav :: nav}"></nav>
+	<div class="container mt-4" data-bs-theme="dark">
+		<div class="card">
+			<div class="card-body">
+			    <h3 class="card-title">Login</h3>
+			    <div th:if="${loginErr}" class="mt-4">
+			    	<h5 class="card-subtitle" th:text="${loginErr}" style="color: red"></h5>
+			    </div>
+			    <form action="login" method="post">
+					<div class="mt-4">
+						<label for="username" class="form-label">Username</label> 
+						<input type="text" class="form-control"	id="username" name="username" placeholder="Username...">
+					</div>
+					<div class="mt-4">
+						<label for="password" class="form-label">Password</label> 
+						<input type="password" class="form-control"	id="password" name="password" placeholder="Password...">
+					</div>
+					<button class="btn btn-light mt-4">Login</button>
+			    </form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
