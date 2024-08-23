@@ -1,4 +1,5 @@
 <html xmlns:th="https://thymeleaf.org">
+<head th:replace="~{./cdn :: cdn}"></head>
 <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">SFTJ</a>
@@ -16,7 +17,12 @@
             Account
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-danger dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">
+				  Delete account
+				</button>	
+			</li>
             <li><a class="dropdown-item" href="logout">Logout</a></li>
           </ul>
         </li>
@@ -33,6 +39,29 @@
         
       </ul>
     </div>
+    <div th:if="${session.user}" class="d-none d-lg-block">
+    	<h3 class="navbar-brand" th:text="'Hello, ' + ${session.user}"></h3>
+    </div>
   </div>
+<!-- Modal -->
+<div  class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">WARNING</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the account?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form action="deleteAccount" method="post">        
+        	<button type="submit" class="btn btn-danger">Yes, cannot be undone</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </nav>
 </html>
