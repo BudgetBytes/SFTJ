@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -19,7 +20,7 @@ public class User implements Serializable{
 	private String username;
 	@Column
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL,  mappedBy = "username")
+	@OneToMany(cascade = CascadeType.ALL,  mappedBy = "username", fetch = FetchType.EAGER)
 	private List<File> files;
 
 	public User() {}

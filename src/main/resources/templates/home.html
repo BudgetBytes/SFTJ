@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns:th="https://thymeleaf.org">
-<head th:replace="~{../static/cdn :: cdn}"></head>
+<head th:replace="~{./fragments/cdn :: cdn}"></head>
 <body>
-	<nav th:replace="~{../static/nav :: nav}"></nav>
+	<nav th:replace="~{./fragments/nav :: nav}"></nav>
 	<div class="container mt-4" data-bs-theme="dark">
 		<div class="card">
 			<div class="card-body">
 				<h3 class="card-title">Home</h3>
-				<form action="upload" method="post" enctype="multipart/form-data">
+				<form action="/auth/upload" method="post" enctype="multipart/form-data">
 					<div class="input-group mt-4 mb-4">
 						<input  required type="file" class="form-control" id="file" name="file" aria-describedby="upload" aria-label="Upload">
 						<button class="btn btn-info" type="submit" id="upload">Upload</button>
@@ -40,14 +40,14 @@
 								<td th:text="${file.name}"></td>
 								<td th:text="${file.uploadedAt}"></td>
 								<td>
-									<form th:action="@{'download' + '/' + ${file.id}}" method="get">
+									<form th:action="@{'/auth/download' + '/' + ${file.id}}" method="get">
 										<button class="btn btn-warning btn-lg">
 											<i class="bi-download"></i>
 										</button>
 									</form>
 								</td>
 								<td>
-									<form th:action="@{'delete' + '/' + ${file.id}}" method="get">
+									<form th:action="@{'/auth/delete' + '/' + ${file.id}}" method="get">
 										<button type="submit" class="btn btn-danger btn-lg">
 											<i class="bi-trash"></i>
 										</button>									

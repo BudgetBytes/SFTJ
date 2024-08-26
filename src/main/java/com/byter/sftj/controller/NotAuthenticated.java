@@ -19,14 +19,22 @@ import com.byter.sftj.utils.Constants;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class Register implements Constants{
+public class NotAuthenticated implements Constants{
 	@Autowired
 	UserService userService;
+	
+	@GetMapping("login") 
+	public ModelAndView login(HttpSession session) {
+		if (CheckAuth.isAuthenticated(session)) {
+			return new ModelAndView("redirect:/auth/home");
+		}
+		return new ModelAndView("login");
+	}
 	
 	@GetMapping("register")
 	public ModelAndView register(HttpSession session) {
 		if (CheckAuth.isAuthenticated(session)) {
-			return new ModelAndView("redirect:/home");
+			return new ModelAndView("redirect:/auth/home");
 		}
 		
 		return new ModelAndView("register");

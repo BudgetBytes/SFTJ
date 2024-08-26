@@ -8,7 +8,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 import com.byter.sftj.utils.Constants;
 
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+// @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication
 public class SftjApplication implements Constants{
 
 	public static void main(String[] args) {
