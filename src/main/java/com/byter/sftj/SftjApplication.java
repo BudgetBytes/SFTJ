@@ -4,11 +4,9 @@ import java.io.File;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import com.byter.sftj.utils.Constants;
 
-// @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @SpringBootApplication
 public class SftjApplication implements Constants{
 

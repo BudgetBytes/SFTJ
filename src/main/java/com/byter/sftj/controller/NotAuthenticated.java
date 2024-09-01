@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.byter.sftj.model.User;
 import com.byter.sftj.service.UserService;
 import com.byter.sftj.utils.BCrypt;
-import com.byter.sftj.utils.CheckAuth;
 import com.byter.sftj.utils.Constants;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,19 +22,18 @@ public class NotAuthenticated implements Constants{
 	@Autowired
 	UserService userService;
 	
+	@GetMapping(value = {"/", ""})
+	public ModelAndView root(HttpSession session) {
+		return new ModelAndView("login");
+	}
+	
 	@GetMapping("login") 
 	public ModelAndView login(HttpSession session) {
-		if (CheckAuth.isAuthenticated(session)) {
-			return new ModelAndView("redirect:/auth/home");
-		}
 		return new ModelAndView("login");
 	}
 	
 	@GetMapping("register")
 	public ModelAndView register(HttpSession session) {
-		if (CheckAuth.isAuthenticated(session)) {
-			return new ModelAndView("redirect:/auth/home");
-		}
 		
 		return new ModelAndView("register");
 	}

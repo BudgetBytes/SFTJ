@@ -28,7 +28,6 @@ import com.byter.sftj.model.File;
 import com.byter.sftj.model.User;
 import com.byter.sftj.service.FileService;
 import com.byter.sftj.service.UserService;
-import com.byter.sftj.utils.CheckAuth;
 import com.byter.sftj.utils.Constants;
 
 import jakarta.servlet.http.HttpSession;
@@ -129,10 +128,6 @@ public class Authenticated implements Constants {
 	
 	@PostMapping("deleteAccount")
 	public ModelAndView delete(HttpSession session) {
-		if (!CheckAuth.isAuthenticated(session)) {
-			return new ModelAndView("redirect:/login");
-		}
-		
 		ModelAndView view = new ModelAndView("home");
 
 		Optional<User> useropt = userService.findById((String) session.getAttribute(SESSION_USERNAME));		
