@@ -34,7 +34,6 @@ public class NotAuthenticated implements Constants{
 	
 	@GetMapping("register")
 	public ModelAndView register(HttpSession session) {
-		
 		return new ModelAndView("register");
 	}
 	

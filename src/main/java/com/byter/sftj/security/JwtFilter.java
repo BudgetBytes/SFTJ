@@ -32,12 +32,12 @@ public class JwtFilter extends OncePerRequestFilter implements  Constants {
 		HttpSession session = request.getSession();
 		String uri = request.getRequestURI();
 		
-		if (isAuthenticated(session) && uri.contains("login") || uri.contains("register")) {
+		if (isAuthenticated(session) && (uri.contains("login") || uri.contains("register"))) {
 			response.sendRedirect("/auth/home");
 		} else if (!isAuthenticated(session) && uri.contains("auth")) {
 			session.invalidate();
-			response.sendRedirect("/login");
-		} else {			
+			filterChain.doFilter(request, response);
+		} else {
 			filterChain.doFilter(request, response);
 		}
 	}
